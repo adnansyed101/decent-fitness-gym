@@ -9,38 +9,178 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrainerRouteRouteImport } from './routes/trainer/route'
+import { Route as MemberRouteRouteImport } from './routes/member/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TrainerPaymentsRouteImport } from './routes/trainer/payments'
+import { Route as TrainerNoticesRouteImport } from './routes/trainer/notices'
+import { Route as TrainerMembersRouteImport } from './routes/trainer/members'
+import { Route as TrainerDashboardRouteImport } from './routes/trainer/dashboard'
+import { Route as TrainerAttendanceRouteImport } from './routes/trainer/attendance'
+import { Route as MemberPaymentsRouteImport } from './routes/member/payments'
+import { Route as MemberMyWorkoutsRouteImport } from './routes/member/my-workouts'
+import { Route as MemberDashboardRouteImport } from './routes/member/dashboard'
 
+const TrainerRouteRoute = TrainerRouteRouteImport.update({
+  id: '/trainer',
+  path: '/trainer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemberRouteRoute = MemberRouteRouteImport.update({
+  id: '/member',
+  path: '/member',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrainerPaymentsRoute = TrainerPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => TrainerRouteRoute,
+} as any)
+const TrainerNoticesRoute = TrainerNoticesRouteImport.update({
+  id: '/notices',
+  path: '/notices',
+  getParentRoute: () => TrainerRouteRoute,
+} as any)
+const TrainerMembersRoute = TrainerMembersRouteImport.update({
+  id: '/members',
+  path: '/members',
+  getParentRoute: () => TrainerRouteRoute,
+} as any)
+const TrainerDashboardRoute = TrainerDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => TrainerRouteRoute,
+} as any)
+const TrainerAttendanceRoute = TrainerAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => TrainerRouteRoute,
+} as any)
+const MemberPaymentsRoute = MemberPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => MemberRouteRoute,
+} as any)
+const MemberMyWorkoutsRoute = MemberMyWorkoutsRouteImport.update({
+  id: '/my-workouts',
+  path: '/my-workouts',
+  getParentRoute: () => MemberRouteRoute,
+} as any)
+const MemberDashboardRoute = MemberDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => MemberRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/member': typeof MemberRouteRouteWithChildren
+  '/trainer': typeof TrainerRouteRouteWithChildren
+  '/member/dashboard': typeof MemberDashboardRoute
+  '/member/my-workouts': typeof MemberMyWorkoutsRoute
+  '/member/payments': typeof MemberPaymentsRoute
+  '/trainer/attendance': typeof TrainerAttendanceRoute
+  '/trainer/dashboard': typeof TrainerDashboardRoute
+  '/trainer/members': typeof TrainerMembersRoute
+  '/trainer/notices': typeof TrainerNoticesRoute
+  '/trainer/payments': typeof TrainerPaymentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/member': typeof MemberRouteRouteWithChildren
+  '/trainer': typeof TrainerRouteRouteWithChildren
+  '/member/dashboard': typeof MemberDashboardRoute
+  '/member/my-workouts': typeof MemberMyWorkoutsRoute
+  '/member/payments': typeof MemberPaymentsRoute
+  '/trainer/attendance': typeof TrainerAttendanceRoute
+  '/trainer/dashboard': typeof TrainerDashboardRoute
+  '/trainer/members': typeof TrainerMembersRoute
+  '/trainer/notices': typeof TrainerNoticesRoute
+  '/trainer/payments': typeof TrainerPaymentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/member': typeof MemberRouteRouteWithChildren
+  '/trainer': typeof TrainerRouteRouteWithChildren
+  '/member/dashboard': typeof MemberDashboardRoute
+  '/member/my-workouts': typeof MemberMyWorkoutsRoute
+  '/member/payments': typeof MemberPaymentsRoute
+  '/trainer/attendance': typeof TrainerAttendanceRoute
+  '/trainer/dashboard': typeof TrainerDashboardRoute
+  '/trainer/members': typeof TrainerMembersRoute
+  '/trainer/notices': typeof TrainerNoticesRoute
+  '/trainer/payments': typeof TrainerPaymentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/member'
+    | '/trainer'
+    | '/member/dashboard'
+    | '/member/my-workouts'
+    | '/member/payments'
+    | '/trainer/attendance'
+    | '/trainer/dashboard'
+    | '/trainer/members'
+    | '/trainer/notices'
+    | '/trainer/payments'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/member'
+    | '/trainer'
+    | '/member/dashboard'
+    | '/member/my-workouts'
+    | '/member/payments'
+    | '/trainer/attendance'
+    | '/trainer/dashboard'
+    | '/trainer/members'
+    | '/trainer/notices'
+    | '/trainer/payments'
+  id:
+    | '__root__'
+    | '/'
+    | '/member'
+    | '/trainer'
+    | '/member/dashboard'
+    | '/member/my-workouts'
+    | '/member/payments'
+    | '/trainer/attendance'
+    | '/trainer/dashboard'
+    | '/trainer/members'
+    | '/trainer/notices'
+    | '/trainer/payments'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MemberRouteRoute: typeof MemberRouteRouteWithChildren
+  TrainerRouteRoute: typeof TrainerRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trainer': {
+      id: '/trainer'
+      path: '/trainer'
+      fullPath: '/trainer'
+      preLoaderRoute: typeof TrainerRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/member': {
+      id: '/member'
+      path: '/member'
+      fullPath: '/member'
+      preLoaderRoute: typeof MemberRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +188,105 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/trainer/payments': {
+      id: '/trainer/payments'
+      path: '/payments'
+      fullPath: '/trainer/payments'
+      preLoaderRoute: typeof TrainerPaymentsRouteImport
+      parentRoute: typeof TrainerRouteRoute
+    }
+    '/trainer/notices': {
+      id: '/trainer/notices'
+      path: '/notices'
+      fullPath: '/trainer/notices'
+      preLoaderRoute: typeof TrainerNoticesRouteImport
+      parentRoute: typeof TrainerRouteRoute
+    }
+    '/trainer/members': {
+      id: '/trainer/members'
+      path: '/members'
+      fullPath: '/trainer/members'
+      preLoaderRoute: typeof TrainerMembersRouteImport
+      parentRoute: typeof TrainerRouteRoute
+    }
+    '/trainer/dashboard': {
+      id: '/trainer/dashboard'
+      path: '/dashboard'
+      fullPath: '/trainer/dashboard'
+      preLoaderRoute: typeof TrainerDashboardRouteImport
+      parentRoute: typeof TrainerRouteRoute
+    }
+    '/trainer/attendance': {
+      id: '/trainer/attendance'
+      path: '/attendance'
+      fullPath: '/trainer/attendance'
+      preLoaderRoute: typeof TrainerAttendanceRouteImport
+      parentRoute: typeof TrainerRouteRoute
+    }
+    '/member/payments': {
+      id: '/member/payments'
+      path: '/payments'
+      fullPath: '/member/payments'
+      preLoaderRoute: typeof MemberPaymentsRouteImport
+      parentRoute: typeof MemberRouteRoute
+    }
+    '/member/my-workouts': {
+      id: '/member/my-workouts'
+      path: '/my-workouts'
+      fullPath: '/member/my-workouts'
+      preLoaderRoute: typeof MemberMyWorkoutsRouteImport
+      parentRoute: typeof MemberRouteRoute
+    }
+    '/member/dashboard': {
+      id: '/member/dashboard'
+      path: '/dashboard'
+      fullPath: '/member/dashboard'
+      preLoaderRoute: typeof MemberDashboardRouteImport
+      parentRoute: typeof MemberRouteRoute
+    }
   }
 }
 
+interface MemberRouteRouteChildren {
+  MemberDashboardRoute: typeof MemberDashboardRoute
+  MemberMyWorkoutsRoute: typeof MemberMyWorkoutsRoute
+  MemberPaymentsRoute: typeof MemberPaymentsRoute
+}
+
+const MemberRouteRouteChildren: MemberRouteRouteChildren = {
+  MemberDashboardRoute: MemberDashboardRoute,
+  MemberMyWorkoutsRoute: MemberMyWorkoutsRoute,
+  MemberPaymentsRoute: MemberPaymentsRoute,
+}
+
+const MemberRouteRouteWithChildren = MemberRouteRoute._addFileChildren(
+  MemberRouteRouteChildren,
+)
+
+interface TrainerRouteRouteChildren {
+  TrainerAttendanceRoute: typeof TrainerAttendanceRoute
+  TrainerDashboardRoute: typeof TrainerDashboardRoute
+  TrainerMembersRoute: typeof TrainerMembersRoute
+  TrainerNoticesRoute: typeof TrainerNoticesRoute
+  TrainerPaymentsRoute: typeof TrainerPaymentsRoute
+}
+
+const TrainerRouteRouteChildren: TrainerRouteRouteChildren = {
+  TrainerAttendanceRoute: TrainerAttendanceRoute,
+  TrainerDashboardRoute: TrainerDashboardRoute,
+  TrainerMembersRoute: TrainerMembersRoute,
+  TrainerNoticesRoute: TrainerNoticesRoute,
+  TrainerPaymentsRoute: TrainerPaymentsRoute,
+}
+
+const TrainerRouteRouteWithChildren = TrainerRouteRoute._addFileChildren(
+  TrainerRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MemberRouteRoute: MemberRouteRouteWithChildren,
+  TrainerRouteRoute: TrainerRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
