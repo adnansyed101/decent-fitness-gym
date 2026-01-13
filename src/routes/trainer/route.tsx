@@ -5,7 +5,6 @@ import {
   Bell,
   CalendarCheck,
   CreditCard,
-  Dumbbell,
   LayoutDashboard,
   Users,
 } from 'lucide-react'
